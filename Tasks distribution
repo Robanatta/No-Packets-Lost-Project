@@ -1,35 +1,35 @@
-Task A (5 points)
+Task A (5 points) -> Fabio, Roberto
 The server should be able to read from a vhosts.conf file
 the information regarding the sites it serves.
 
-Task B (10 points)
+Task B (10 points) -> ALL
 The submission must include one site per group member.
 
-Task C (10 points)
+Task C (10 points) -> Fabio
 The server should be able to answer well-formed GET
 requests as specified by the corresponding RFCs.
 
-Task D (10 points)
+Task D (10 points) -> Roberto
 […] PUT requests […]
 
-Task E (10 points)
+Task E (10 points) -> Marco
 […] DELETE requests […]
 
-Task F (5 points)
+Task F (5 points) -> Marco
 The server should be able to answer to NTW22INFO
 requests as specified by the assignment.
 
-Task G (10 points)
+Task G (10 points) -> ALL (2xx Roberto, 4xx Fabio, 5xx Marco)
 The server must answer client requests with the correct
 status code appropriate for the situation. Status codes
 200, 201, 400, 403, 404,405, 501 and 505 must be
 considered.
 
-Task H (5 points)
+Task H (5 points) -> To be decided
 The server must accept a port number as an argument and it
 must listen for connections on it. Use 8080 as default.
 
-Task I (20 points)
+Task I (20 points) -> ALL
 Your code should be in a working state, without needing
 modifications from the Instructors, and your submission must
 comply with the specified guidelines. Points will be deducted if
@@ -37,7 +37,7 @@ the guidelines are not respected, if the code crashes, has
 compilation errors or does not execute, or if additional tools are
 needed for compilation/execution (like maven, gradle, etc.).
 
-Task J (15 points)
+Task J (15 points) -> ALL
 Your code must be appropriately documented and your submission
 must include a README file as a report of your work. The report
 must include compilation and execution steps, plus a table of
