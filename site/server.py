@@ -3,6 +3,7 @@
 # This is a very simple SERVER implementation for a very very simple
 # request/reply protocol.
 #
+from importlib.resources import contents
 import socket
 import sys
 
@@ -12,6 +13,8 @@ if len(sys.argv) > 1:
     port_number = int(sys.argv[1])
 else:
     port_number = 1234
+
+
 
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,9 +39,6 @@ while True:
     # Parse HTTP headers
     headers = request.decode('utf-8').split('\n')
     method = headers[0].split()[0]
-
-    # Da modificare la selezione di host e filename
-
     filename = headers[0].split()[1]
     host = headers[1].split()[1]
 
@@ -64,22 +64,34 @@ while True:
 
         try:
             # Get the content of the file
-            fin = open(host + filename)
-            content = fin.read()
-            fin.close()
+            # In case it need the html page
+            if filename.endswith('.html'):
+                data = open(host + filename, "r")
+                content = data.read()
+                response = ('HTTP/1.0 200 OK\n\n' + content).encode('utf-8')
+            # In case it need files like png or gif            
+            else:
+                data = open(host + filename, "rb")
+                content = data.read()
+                response = 'HTTP/1.0 200 OK\n\n'.encode('utf-8') + content
 
-            response = 'HTTP/1.0 200 OK\n\n'
+            data.close()
+
+            
         except FileNotFoundError:
 
-            response = 'HTTP/1.0 404 NOT FOUND\n\nFile Not Found'
+            response = 'HTTP/1.0 404 NOT FOUND\n\nFile Not Found\n'.encode('utf-8')
+            
     # Method not allowed or not implemented
     else:
-        response = 'HTTP/1.0 405 METHOD NOT ALLOWED\n\nMethod Not Allowed'
+        response = 'HTTP/1.0 405 METHOD NOT ALLOWED\n\nMethod Not Allowed\n'.encode('utf-8')
 
     
-    print(response)
-    conn.sendall(response.encode('utf-8'))
-    conn.close()
+    try:
+        conn.sendall(response)
+        
+    finally:
+        conn.close()
 
 s.close()
 
