@@ -8,6 +8,7 @@ from importlib.resources import contents
 from socket import *
 import parser
 import get
+import error
 
 
 parser = argparse.ArgumentParser(description="Our HTTP Server.")
@@ -50,9 +51,10 @@ while True:
         response = get.get_files(filename, host, protocol)           
     # Method not allowed or not implemented
     else:
-        response = 'HTTP/1.0 405 METHOD NOT ALLOWED\n\nMethod Not Allowed\n'.encode('utf-8')
-
+        response = error.error_handling(405)
+        
     try:
+        print(response)
         conn.sendall(response)
         
     finally:

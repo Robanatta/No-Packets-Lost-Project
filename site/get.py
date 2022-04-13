@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+import error 
 
 
 def get_files(filename, host, protocol):
@@ -12,9 +13,12 @@ def get_files(filename, host, protocol):
         while vhosts:
             vhosts = vhosts.split(",")
             if vhosts[0] == host:
-                filename = '/' + vhosts[1]
+                filename = '/' + vhosts[1]                
             vhosts = vin.readline()
         vin.close()
+        if filename == '/':
+            return(error.error_handling(404))
+
 
     
     path = os.path.join(host, filename[1:])
@@ -62,6 +66,6 @@ def get_files(filename, host, protocol):
 
         
     except FileNotFoundError:
-        response = 'HTTP/1.0 404 NOT FOUND File Not Found'.encode('utf-8')
-    print(response)
+        return(error.error_handling(404))
+
     return response
