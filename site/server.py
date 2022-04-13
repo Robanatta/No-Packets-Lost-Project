@@ -7,9 +7,7 @@ import argparse
 from importlib.resources import contents
 from socket import *
 import parser
-import os
-
-
+import get
 
 
 parser = argparse.ArgumentParser(description="Our HTTP Server.")
@@ -45,14 +43,10 @@ while True:
     filename = headers[0].split()[1]
     host = headers[1].split()[1]
 
-    
-
     # Responses based on the HTTP Method
     # GET method
     if method == 'GET':
-
-        response = 'HTTP/1.0 404 NOT FOUND\n\nFile Not Found\n'.encode('utf-8')
-            
+        response = get.get_files(filename, host)           
     # Method not allowed or not implemented
     else:
         response = 'HTTP/1.0 405 METHOD NOT ALLOWED\n\nMethod Not Allowed\n'.encode('utf-8')
