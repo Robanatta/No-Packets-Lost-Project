@@ -57,9 +57,11 @@ while True:
             vhosts = vhosts.split(",")
 
             i = 0
+            print(vhosts)
             while i < len(vhosts):
                 if vhosts[i] == host:
                     filename = '/' + vhosts[i + 1]
+                    break
                 i += 1
 
         try:
@@ -86,7 +88,7 @@ while True:
     else:
         response = 'HTTP/1.0 405 METHOD NOT ALLOWED\n\nMethod Not Allowed\n'.encode('utf-8')
 
-    
+    print(response)
     try:
         conn.sendall(response)
         
