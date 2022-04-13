@@ -6,7 +6,6 @@
 import argparse
 from importlib.resources import contents
 from socket import *
-import sys
 import parser
 import os
 
