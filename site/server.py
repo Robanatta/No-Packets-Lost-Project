@@ -3,28 +3,32 @@
 # This is a very simple SERVER implementation for a very very simple
 # request/reply protocol.
 #
+import argparse
 from importlib.resources import contents
-import socket
+from socket import *
 import sys
-
-
-
-if len(sys.argv) > 1:
-    port_number = int(sys.argv[1])
-else:
-    port_number = 1234
+import parser
+import os
 
 
 
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+parser = argparse.ArgumentParser(description="Our HTTP Server.")
+parser.add_argument('--port', dest='serverPort', type=int, default=8080,
+                    help='Default listener port for the HTTP server')
 
-s.bind(('', port_number))
-s.listen(1)
+args = parser.parse_args()
+
+
+
+serverSocket = socket(AF_INET, SOCK_STREAM)
+serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
+serverSocket.bind(('', args.serverPort))
+serverSocket.listen(1)
 
 while True:
     print('Accepting connections')
-    conn, addr = s.accept()
+    conn, addr = serverSocket.accept()
     print('Serving a connection from host', addr[0], 'on port', addr[1])
     request = conn.recv(1024)   # reading data (a request) from the connection
     if not request:
@@ -48,41 +52,7 @@ while True:
     # GET method
     if method == 'GET':
 
-        # In case of '/' we get entry_point_file from the vhosts.conf file
-        if filename == '/':
-            # Open vhosts.conf file
-            vin = open('vhosts.conf')
-            vhosts = vin.read()
-            vin.close()
-            vhosts = vhosts.split(",")
-
-            i = 0
-            print(vhosts)
-            while i < len(vhosts):
-                if vhosts[i] == host:
-                    filename = '/' + vhosts[i + 1]
-                    break
-                i += 1
-
-        try:
-            # Get the content of the file
-            # In case it need the html page
-            if filename.endswith('.html'):
-                data = open(host + filename, "r")
-                content = data.read()
-                response = ('HTTP/1.0 200 OK\n\n' + content).encode('utf-8')
-            # In case it need files like png or gif            
-            else:
-                data = open(host + filename, "rb")
-                content = data.read()
-                response = 'HTTP/1.0 200 OK\n\n'.encode('utf-8') + content
-
-            data.close()
-
-            
-        except FileNotFoundError:
-
-            response = 'HTTP/1.0 404 NOT FOUND\n\nFile Not Found\n'.encode('utf-8')
+        response = 'HTTP/1.0 404 NOT FOUND\n\nFile Not Found\n'.encode('utf-8')
             
     # Method not allowed or not implemented
     else:
@@ -95,5 +65,5 @@ while True:
     finally:
         conn.close()
 
-s.close()
+serverSocket.close()
 
