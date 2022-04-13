@@ -3,14 +3,9 @@
 #curl RobertoIbanez.ch:8080/
 #telnet
 #
-# 200 = OK, Request has succeded
-# 201 = Succesfully created put request
-# 400 = Bad request
-# 403 = Forbidden reques
-# 404 = Not Found
-# 405 = Method Not Allowed
-# 501 = The server does not support the request
-# 505 = Internal Error of the server
+# 200,
+# 201 = SUccesfully created put request
+# ,400,403,404,405,501,505
 
 #GET / HTTP/1.1
 #Host: robertoibanez.ch:8080
@@ -54,18 +49,10 @@ while(True):
     request_method, request_resource, request_protocol = request_line.split(" ")
     if (request_method == 'GET'):
         print("I got a GET")
-        site = 'robertoibanez.ch'
-        request_resource_path = os.path.join(site,request_resource[1:])
+        request_resource_path = os.path.join(request_resource[1:])
         print(request_resource)
         print(request_resource_path)
-        #----------------------------------CHECK-----------------------------
-        if os.path.exists():
-            print("I will answer with the file")
-        else:
-            print("Error 404: Not Found")
-        
-        
-
+        os.path.exists()
 
 
     elif(request_method == 'PUT'):
@@ -75,7 +62,7 @@ while(True):
     elif(request_method == 'DELETE'):
         print("I got a DELETE")
 
-
+        
     else:
         print("Error code needed: an error occurried")
     #elif(request_method == '')
