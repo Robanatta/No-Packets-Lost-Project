@@ -43,7 +43,7 @@ while True:
     filename = headers[0].split()[1]
     protocol = headers[0].split()[2]
     host = headers[1].split()[1]
-
+    host = host.split(":")[0]
     # Responses based on the HTTP Method
     # GET method
     if method == 'GET':
