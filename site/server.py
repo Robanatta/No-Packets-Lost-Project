@@ -41,17 +41,17 @@ while True:
     headers = request.decode('utf-8').split('\n')
     method = headers[0].split()[0]
     filename = headers[0].split()[1]
+    protocol = headers[0].split()[2]
     host = headers[1].split()[1]
 
     # Responses based on the HTTP Method
     # GET method
     if method == 'GET':
-        response = get.get_files(filename, host)           
+        response = get.get_files(filename, host, protocol)           
     # Method not allowed or not implemented
     else:
         response = 'HTTP/1.0 405 METHOD NOT ALLOWED\n\nMethod Not Allowed\n'.encode('utf-8')
 
-    print(response)
     try:
         conn.sendall(response)
         
