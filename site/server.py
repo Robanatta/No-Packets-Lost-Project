@@ -8,6 +8,7 @@ from importlib.resources import contents
 from socket import *
 import parser
 import get
+import put
 import error
 
 
@@ -50,6 +51,11 @@ while True:
     if method == 'GET':
         response = get.get_files(filename, host, protocol)           
     # Method not allowed or not implemented
+    
+    #PUT method
+    if method == 'PUT':
+        response = put.PUT_File(filename, host, protocol, content_type, body)
+    
     else:
         response = error.error_handling(405)
         

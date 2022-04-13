@@ -23,6 +23,8 @@ def get_files(filename, host, protocol):
     
     path = os.path.join(host, filename[1:])
     name, extension = os.path.splitext(path)
+    print(name)
+    print(extension)
     try:
     
 
