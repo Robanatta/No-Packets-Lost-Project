@@ -69,5 +69,10 @@ def get_files(filename, host, protocol):
         
     except FileNotFoundError:
         return(error.error_handling(404))
+    except OSError:
+        if type == 501:
+            return(error.error_handling(501))
+        if type == 503:
+            return(error.error_handling(503))
 
     return response
