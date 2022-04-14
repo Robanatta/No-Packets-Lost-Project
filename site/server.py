@@ -42,7 +42,6 @@ while True:
     try:
         request_splitted = request.decode('utf-8').split("\r\n")
         for i in request_splitted:
-            print(i.split(':')[0])
             if i.split(':')[0] == 'Host':
                 request_host = i.split(':')[1][1:]
                 break
@@ -65,11 +64,11 @@ while True:
             response = delete.delete_files(request_resource, request_host, request_protocol)
         
         #PUT method
-        #elif request_method == 'PUT':
-        #    content_type = headers[2].split()[1]
-        #    Content-Length = headers[3].split()[1]
-        #    body = (headers[4:])
-        #    response = put.PUT_File(filename, host, protocol, content_type, body)
+        elif request_method == 'PUT':
+           content_type = request_header[2].split()[1]
+        #    Content-Length = request_header[3].split()[1]
+           body = (request_header[4:])
+           response = put.PUT_File(request_resource, request_host, request_protocol, content_type, body)
         
         #NTW22INFO
         #elif request_method == 'NTW22INFO':
@@ -78,7 +77,7 @@ while True:
         else:
             response = error.error_handling(405, request_protocol)
     try:
-        # print(response)
+        print(response)
         conn.sendall(response)
     finally:
         conn.close()
