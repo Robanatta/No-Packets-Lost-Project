@@ -61,7 +61,7 @@ while True:
     #PUT method
     if method == 'PUT':
         content_type = headers[2].split()[1]
-        body = (headers[3:] + "\r\n")
+        body = (headers[3:])
         response = put.PUT_File(filename, host, protocol, content_type, body)
     
     #NTW22INFO

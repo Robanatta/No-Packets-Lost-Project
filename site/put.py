@@ -31,7 +31,7 @@ def PUT_File(filename, host,protocol, content_type, body):
         
     response_header = []
     response_status = " ".join([protocol, "201", "Created"])
-    response_location = " ".join("Content-Location:",filename )
+    response_location = " ".join(["Content-Location:", filename] )
     response_header.append(response_location)
       
     request_headers = "\r\n".join(response_header)
