@@ -16,7 +16,7 @@ def get_files(filename, host, protocol):
             vhosts = vin.readline()
         vin.close()
         if filename == '/':
-            return(error.error_handling(404))
+            return(error.error_handling(404, protocol))
 
 
     
@@ -67,11 +67,11 @@ def get_files(filename, host, protocol):
 
         
     except FileNotFoundError:
-        return(error.error_handling(404))
+        return(error.error_handling(404, protocol))
     except OSError:
         if type == 501:
-            return(error.error_handling(501))
+            return(error.error_handling(501, protocol))
         if type == 503:
-            return(error.error_handling(503))
+            return(error.error_handling(503, protocol))
 
     return response

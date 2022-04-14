@@ -77,7 +77,7 @@ while True:
         #response = "Not implemented yet"
     
     else:
-        response = error.error_handling(405)
+        response = error.error_handling(405, request_protocol)
 
     
 
