@@ -4,7 +4,6 @@ import error
 
 
 def get_files(filename, host, protocol):
-    
     # In case of '/' we get entry_point_file from the vhosts.conf file
     if filename == '/':
         # Open vhosts.conf file
@@ -54,7 +53,7 @@ def get_files(filename, host, protocol):
         response_header.append("Server: Group NoPacketsLost Server")
         request_content_length = "Content-length: %s" % len(content) 
         response_header.append(request_content_length)
-        response_header.append(request_content_type)  
+        response_header.append("Content-Type:" + request_content_type)  
         request_headers = "\r\n".join(response_header)
 
         response = (response_status + "\r\n" + request_headers + "\r\n\r\n").encode('utf-8')
