@@ -20,14 +20,10 @@ parser.add_argument('--port', dest='serverPort', type=int, default=8080,
 
 args = parser.parse_args()
 
-
-
 serverSocket = socket(AF_INET, SOCK_STREAM)
 serverSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
 serverSocket.bind(('', args.serverPort))
 serverSocket.listen(1)
-
-#GET / HTTP/1.1\r\nHost: guyincognito.ch
 
 while True:
     print('Accepting connections')
@@ -43,50 +39,47 @@ while True:
     print('request:', request.decode('utf-8'))
 
     # Parser request
-    print("Code")
-    print(request.decode('utf-8'))
-    request_splitted = request.decode('utf-8').split("\r\n")
-    print(request_splitted)
-    for i in request_splitted:
-        print(i.split(':')[0])
-        if i.split(':')[0] == 'Host':
-            request_host = i.split(':')[1][1:]
-            break
-    request_line = request_splitted[0]
-    request_header = request_splitted[1:]
-    request_method, request_resource, request_protocol = request_line.split(" ")
-
-    # Responses based on the HTTP Method
-    # GET method
-    if request_method == 'GET':
-        response = get.get_files(request_resource, request_host, request_protocol)      
-    
-    #DELETE method
-    elif request_method == 'DELETE':
-        response = delete.delete_files(request_resource, request_host, request_protocol)
-    
-    #PUT method
-    #elif request_method == 'PUT':
-    #    content_type = headers[2].split()[1]
-    #    Content-Length = headers[3].split()[1]
-    #    body = (headers[4:])
-    #    response = put.PUT_File(filename, host, protocol, content_type, body)
-    
-    #NTW22INFO
-    #elif request_method == 'NTW22INFO':
-        #response = "Not implemented yet"
-    
-    else:
-        response = error.error_handling(405, request_protocol)
-
-    
-
-    
-        
     try:
-        print(response)
-        conn.sendall(response)
+        request_splitted = request.decode('utf-8').split("\r\n")
+        for i in request_splitted:
+            print(i.split(':')[0])
+            if i.split(':')[0] == 'Host':
+                request_host = i.split(':')[1][1:]
+                break
+        request_line = request_splitted[0]
+        request_header = request_splitted[1:]
+        request_method, request_resource, request_protocol = request_line.split(" ")
+    except:
+        response = error.error_handling(400, request_protocol) 
+
+    if request_protocol != "HTTP/1.1" and request_protocol != "HTTP/1.0":
+        response = error.error_handling(505, request_protocol) 
+    else:
+        # Responses based on the HTTP Method
+        # GET method
+        if request_method == 'GET':
+            response = get.get_files(request_resource, request_host, request_protocol)      
         
+        #DELETE method
+        elif request_method == 'DELETE':
+            response = delete.delete_files(request_resource, request_host, request_protocol)
+        
+        #PUT method
+        #elif request_method == 'PUT':
+        #    content_type = headers[2].split()[1]
+        #    Content-Length = headers[3].split()[1]
+        #    body = (headers[4:])
+        #    response = put.PUT_File(filename, host, protocol, content_type, body)
+        
+        #NTW22INFO
+        #elif request_method == 'NTW22INFO':
+            #response = "Not implemented yet"
+        
+        else:
+            response = error.error_handling(405, request_protocol)
+    try:
+        # print(response)
+        conn.sendall(response)
     finally:
         conn.close()
 

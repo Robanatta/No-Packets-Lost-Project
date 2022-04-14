@@ -2,19 +2,20 @@ import os
 from datetime import datetime
 import error 
 
-
 def get_files(filename, host, protocol):
     # In case of '/' we get entry_point_file from the vhosts.conf file
     if filename == '/':
         # Open vhosts.conf file
         vin = open('vhosts.conf')
         vhosts = vin.readline()
+        # Search for the host in the file vhost.conf
         while vhosts:
             vhosts = vhosts.split(",")
             if vhosts[0] == host:
                 filename = '/' + vhosts[1]                
             vhosts = vin.readline()
         vin.close()
+        # If it didn't found it then it means that host is not supported
         if filename == '/':
             return(error.error_handling(404, protocol))
 
@@ -22,11 +23,8 @@ def get_files(filename, host, protocol):
     
     path = os.path.join(host, filename[1:])
     name, extension = os.path.splitext(path)
-    print(name)
-    print(extension)
+    # Based on the extension the request and the data type to open changes
     try:
-    
-
         if extension == ".html":
             request_content_type = "text/html"
             data = open(path, "r")
@@ -46,6 +44,7 @@ def get_files(filename, host, protocol):
 
         content = data.read()
 
+        # Creates the response to send
         response_header = []
         response_status = " ".join([protocol, "200", "OK"])
         response_time = datetime.today().strftime('%a, %d %b %Y %X %Z')

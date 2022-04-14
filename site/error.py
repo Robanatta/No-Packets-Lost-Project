@@ -2,6 +2,7 @@ from datetime import datetime
 
 def error_handling(type, protocol):
     response_header = []
+    # Based on the number of the error creates the correct response to send
     if type == 400:
         response_status = " ".join([protocol, "400", "BAD REQUEST"])
     elif type == 403:
