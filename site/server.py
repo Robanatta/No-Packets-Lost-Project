@@ -41,11 +41,17 @@ while True:
 
     # Parse HTTP headers
     headers = request.decode('utf-8').split('\r\n')
+    print(headers)
     method = headers[0].split()[0]
+    print(method)
     filename = headers[0].split()[1]
+    print(filename)
     protocol = headers[0].split()[2]
+    print(protocol)
     host = headers[1].split()[1]
+    print(host)
     host = host.split(":")[0]
+    print(host)
     # Responses based on the HTTP Method
     # GET method
     if method == 'GET':
