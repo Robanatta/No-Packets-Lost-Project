@@ -4,4 +4,4 @@ No Packets Lost
 
 - Fabio Zampiello Lutzu ->
 
-- Marco Vescio ->
+- Marco Vescio -> Task B, Task E, Task F, Task G, Task I, Task J 

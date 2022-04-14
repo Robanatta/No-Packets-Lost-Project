@@ -6,9 +6,10 @@
 import argparse
 from importlib.resources import contents
 from socket import *
-import parser
+#import parser
 import get
 import put
+import delete
 import error
 
 
@@ -57,7 +58,9 @@ while True:
     # Responses based on the HTTP Method
     # GET method
     if request_method == 'GET':
-        response = get.get_files(request_resource, request_host, request_protocol)           
+        response = get.get_files(request_resource, request_host, request_protocol)      
+    elif request_method == 'DELETE':
+        response = delete.delete_files(request_resource, request_host, request_protocol)
     
     #PUT method
     #elif request_method == 'PUT':
