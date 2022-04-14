@@ -40,7 +40,7 @@ while True:
 
 
     # Parse HTTP headers
-    headers = request.decode('utf-8').split('\n')
+    headers = request.decode('utf-8').split('\r\n')
     method = headers[0].split()[0]
     filename = headers[0].split()[1]
     protocol = headers[0].split()[2]
@@ -54,7 +54,13 @@ while True:
     
     #PUT method
     if method == 'PUT':
+        content_type = headers[2].split()[1]
+        body = (headers[3:] + "\r\n")
         response = put.PUT_File(filename, host, protocol, content_type, body)
+    
+    #NTW22INFO
+    if method == 'NTW22INFO':
+        response = "Not implemented yet"
     
     else:
         response = error.error_handling(405)
