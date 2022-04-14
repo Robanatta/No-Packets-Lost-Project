@@ -59,6 +59,8 @@ while True:
     # GET method
     if request_method == 'GET':
         response = get.get_files(request_resource, request_host, request_protocol)      
+    
+    #DELETE method
     elif request_method == 'DELETE':
         response = delete.delete_files(request_resource, request_host, request_protocol)
     
