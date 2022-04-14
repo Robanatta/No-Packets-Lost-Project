@@ -65,7 +65,7 @@ while True:
     #PUT method
     #elif request_method == 'PUT':
     #    content_type = headers[2].split()[1]
-    #    Content-Length = (headers[3])
+    #    Content-Length = headers[3].split()[1]
     #    body = (headers[4:])
     #    response = put.PUT_File(filename, host, protocol, content_type, body)
     
