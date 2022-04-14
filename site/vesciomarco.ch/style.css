@@ -1,0 +1,18 @@
+html {
+    background-color: grey;
+}
+
+body {
+    text-align: center;
+    font-style: italic;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+h1 {
+    color: ivory;
+    font-style: normal;
+}
+
+img {
+  width: 10%;
+}
