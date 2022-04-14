@@ -61,9 +61,9 @@ while True:
     
     #PUT method
     #elif request_method == 'PUT':
-        #content_type = headers[2].split()[1]
-        #body = (headers[3:])
-        #response = put.PUT_File(filename, host, protocol, content_type, body)
+    #    content_type = headers[2].split()[1]
+    #    body = (headers[3:])
+    #    response = put.PUT_File(filename, host, protocol, content_type, body)
     
     #NTW22INFO
     #elif request_method == 'NTW22INFO':

@@ -1,5 +1,20 @@
 #PUT implementation
 
+# Syntax: PUT /new.html HTTP/1.1
+
+#Example of request:
+#    PUT /new.html HTTP/1.1
+#   Host: robertoibanez.ch
+#   Content-type: text/html
+#   Content-Length: 16
+#   
+#
+#   <p>New File</p>
+
+#Example of response:
+#   HTTP/1.1 201 Created
+#   Content-Location: /new.html
+
 import os
 
 def PUT_File(filename, host,protocol, content_type, body):
