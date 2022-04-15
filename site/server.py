@@ -6,7 +6,7 @@
 import argparse
 from importlib.resources import contents
 from socket import *
-#import parser
+import parser
 import get
 import put
 import delete
