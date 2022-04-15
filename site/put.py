@@ -18,7 +18,7 @@
 import os
 import error
 
-def PUT_File(filename, host,protocol, content_type, body):
+def PUT_File(filename, host,protocol, body):
     # In case of '/' we get entry_point_file from the vhosts.conf file
     if filename == '/':
         # Open vhosts.conf file
@@ -42,32 +42,27 @@ def PUT_File(filename, host,protocol, content_type, body):
     name, extension = os.path.splitext(path)
 
     if extension == ".html":
-        request_content_type = "text/html"
         data = open(path, "w")
         for i in range(0, len(body)):
             data.write(body[i])
         data.close()
     elif extension == ".txt":
-        request_content_type = "text/plain"
         data = open(path, "w")
         for i in range(0, len(body)):
             data.write(body[i])
         data.close()
     elif extension == ".jpeg":
-        request_content_type = "image/jpeg"
         data = open(path, "wb")
         for i in range(0, len(body)):
             data.write(body[i])
         data.close()
     elif extension == ".png":
-        request_content_type = "image/png" 
         data = open(path, "wb")
         for i in range(0, len(body)):
             data.write(body[i])
         data.close()
     else:
-        request_content_type = "Type Not supported" 
-        
+        return(error.error_handling(400, protocol))        
     response_header = []
     response_status = " ".join([protocol, "201", "Created"])
     response_location = " ".join(["Content-Location:", path] )
