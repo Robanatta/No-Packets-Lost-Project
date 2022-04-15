@@ -11,6 +11,6 @@ def NTW22INFO_method(protocol, host):
         vhosts = vin.readline()
     vin.close()
     if filename == '/':
-        return(error.error_handling(404))
+        return(error.error_handling(404, protocol))
     
     
