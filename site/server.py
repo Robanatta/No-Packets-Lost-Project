@@ -71,8 +71,8 @@ while True:
            response = put.PUT_File(request_resource, request_host, request_protocol, content_type, body)
         
         #NTW22INFO
-        #elif request_method == 'NTW22INFO':
-            #response = "Not implemented yet"
+        elif request_method == 'NTW22INFO':
+            response = ntw22info.NTW22INFO_method(request_protocol, request_host)
         
         else:
             response = error.error_handling(405, request_protocol)

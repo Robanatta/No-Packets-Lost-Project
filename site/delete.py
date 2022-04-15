@@ -32,9 +32,9 @@ def delete_files(filename, host, protocol):
         os.remove(path)
 
     except FileNotFoundError:
-        return(error.error_handling(404))
+        return(error.error_handling(404, protocol))
     except OSError:
         if type == 501:
-            return(error.error_handling(501))
+            return(error.error_handling(501, protocol))
         if type == 503:
-            return(error.error_handling(503))
+            return(error.error_handling(503, protocol))
