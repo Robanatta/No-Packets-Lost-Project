@@ -3,4 +3,4 @@
 Team Members:
 - Roberto Ibanez Omar
 - Fabio Zampiello Lutzu
-- Marco Vescio
+- Marco Vescio - Didn't collaborate as stated on teams
