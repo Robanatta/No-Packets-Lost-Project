@@ -12,7 +12,8 @@ def get_files(filename, host, protocol):
         while vhosts:
             vhosts = vhosts.split(",")
             if vhosts[0] == host:
-                filename = '/' + vhosts[1]                
+                filename = '/' + vhosts[1] 
+                break               
             vhosts = vin.readline()
         vin.close()
         # If it didn't found it then it means that host is not supported
@@ -63,7 +64,7 @@ def get_files(filename, host, protocol):
         response = response + content
 
         data.close()
-
+        return response
         
     except FileNotFoundError:
         return(error.error_handling(404, protocol))
@@ -73,4 +74,4 @@ def get_files(filename, host, protocol):
         if type == 503:
             return(error.error_handling(503, protocol))
 
-    return response
+    
